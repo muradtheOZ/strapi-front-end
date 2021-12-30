@@ -10,7 +10,15 @@ const Review = gql`
         attributes{
           title,
           rating,
-          body
+          body,
+          categories{
+            data{
+              id,
+              attributes{
+                name
+              }
+            }
+          }
         }
       }
     }
@@ -27,13 +35,15 @@ const Reviewdetails = () => {
   })
   if(loading) return <p>Loading....</p>
   if(error) return <p>Error :( </p>
-  console.log(data)
+  console.log("data from details review page: ", data)
   return (
     <div>
       <div className="review-card">
             <div className="rating">{data.review.data.attributes.rating}</div>
             <h2>{data.review.data.attributes.title}</h2>
-            <small>console list</small>
+            {data.review.data.attributes.categories.data.map(category =>(
+            <small key={category.id}>{category.attributes.name}</small>
+    ))}
 
             <p>{data.review.data.attributes.body}</p>
 
