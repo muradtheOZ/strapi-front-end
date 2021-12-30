@@ -64,7 +64,7 @@ const Category = () => {
             <div className="rating">{review.attributes.rating}</div>
             <h2>{review.attributes.title}</h2>
           {review.attributes.categories.data.map(category =>(
-            <small>{category.attributes.name}</small>
+            <small key={category.id}>{category.attributes.name}</small>
     ))}
 
             <p>{review.attributes.body.substring(0,200)}...</p>
